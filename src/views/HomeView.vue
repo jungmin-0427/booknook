@@ -145,10 +145,11 @@ function onDragEnd() {
 
 // ── 스와이프 (touch) ──
 function onTouchStart(e: TouchEvent) {
+  if (!e.touches[0]) return
   dragging.value = true; dragStart.value = e.touches[0].clientX; dragDelta.value = 0
 }
 function onTouchMove(e: TouchEvent) {
-  if (!dragging.value) return
+  if (!dragging.value || !e.touches[0]) return
   dragDelta.value = e.touches[0].clientX - dragStart.value
 }
 function onTouchEnd() { onDragEnd() }
